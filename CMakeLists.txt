@@ -31,7 +31,6 @@ add_subdirectory(pybind11)
 
 pybind11_add_module(metnum
                     src/metnum.cpp
-                    src/knn.cpp
                     src/pca.cpp
                     src/eigen.cpp)
 
@@ -50,7 +49,6 @@ install(TARGETS metnum DESTINATION ${CMAKE_INSTALL_PREFIX}/notebooks)
 # Crear un binario para testing manteniendo las dependencias de python por separado
 add_executable(tp2
         src/main.cpp
-        src/knn.cpp
         src/pca.cpp
         src/eigen.cpp)
 

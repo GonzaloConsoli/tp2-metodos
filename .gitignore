@@ -11,3 +11,5 @@ pyvenv.cfg
 /share
 /.idea
 /data/train.csv
+.venv/
+*.so
