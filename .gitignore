@@ -1,0 +1,13 @@
+/eigen
+/pybind11
+/build
+/tp2
+/.vscode
+/bin
+/etc
+/lib
+/lib64
+pyvenv.cfg
+/share
+/.idea
+/data/train.csv
