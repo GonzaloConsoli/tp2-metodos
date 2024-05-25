@@ -7,6 +7,7 @@ using namespace std;
 
 
 pair<double, Vector> power_iteration(const Matrix& A, unsigned num_iter, double eps)
+// Devuelve un par con el autovalor dominante y el autovector correspondiente
 {
     Vector v = Vector::Random(A.cols());
     double a;
@@ -26,6 +27,7 @@ pair<double, Vector> power_iteration(const Matrix& A, unsigned num_iter, double 
 }
 
 pair<Vector, Matrix> get_first_eigenvalues(const Matrix& X, unsigned num, unsigned num_iter, double epsilon)
+// Devuelve un par con un vector de los primeros num autovalores y una matriz con los autovectores correspondientes
 {
     Matrix A(X);
     Vector eigvalues(num);

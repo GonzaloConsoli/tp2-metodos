@@ -11,8 +11,11 @@ public:
 
     Eigen::MatrixXd get_transformacion();
     void set_transformacion(Matrix &X);
+    Vector get_explained_variance();
+    Vector get_eigen_values();
 private:
 
+    Vector eigen_values;
     unsigned int alfa;
     Matrix Transformacion;
 

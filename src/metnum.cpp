@@ -12,7 +12,9 @@ PYBIND11_MODULE(metnum, m) {
         .def("fit", &PCA::fit)
         .def("transform", &PCA::transform)
         .def("get_transformacion", &PCA::get_transformacion)
-        .def("set_transformacion", &PCA::set_transformacion);
+        .def("set_transformacion", &PCA::set_transformacion)
+        .def("get_explained_variance", &PCA::get_explained_variance)
+        .def("get_eigen_values", &PCA::get_eigen_values);
     m.def(
         "power_iteration", &power_iteration,
         "Function that calculates eigenvector",

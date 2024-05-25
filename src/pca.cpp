@@ -8,6 +8,7 @@ using namespace std;
 PCA::PCA(unsigned int alfa)
 {
   this->alfa= alfa;
+  this->eigen_values = Vector(alfa);
 }
 
 void PCA::fit(Matrix &X)
@@ -17,6 +18,7 @@ void PCA::fit(Matrix &X)
 	pair<Vector, Matrix> tupla_magica_is_back = get_first_eigenvalues(cov, this->alfa);
 
 	this->Transformacion = (tupla_magica_is_back.second).transpose();
+	this->eigen_values = tupla_magica_is_back.first;
 
 }
 
@@ -31,4 +33,16 @@ Eigen::MatrixXd PCA::get_transformacion(){
 
 void PCA::set_transformacion(Matrix &X){
 	this->Transformacion=X;
+}
+
+Vector PCA::get_explained_variance(){
+	Vector explained_variance(this->alfa);
+	for (int i=0; i<this->alfa;i++){
+		explained_variance[i] = this->eigen_values[i] / this->eigen_values.sum();
+	}
+	return explained_variance;
+}
+
+Vector PCA::get_eigen_values(){
+	return this->eigen_values;
 }
