@@ -55,3 +55,4 @@ std::pair<Eigen::VectorXd, Matrix>
     get_first_eigenvalues(const Matrix& mat, unsigned num, unsigned num_iter=5000, double epsilon=1e-16);
 
 double calcularDist(const Vector &v1, const Vector &v2);
+bool isMultiple(const Vector &vector1, const Vector &vector2);

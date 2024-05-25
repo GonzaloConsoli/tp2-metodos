@@ -13,3 +13,9 @@ pyvenv.cfg
 /data/train.csv
 .venv/
 *.so
+src/eigen.cpp
+notebooks/datos/X_test.csv
+notebooks/datos/X_train.csv
+notebooks/datos/y_train.csv
+notebooks/datos/y_test.csv
+src/test

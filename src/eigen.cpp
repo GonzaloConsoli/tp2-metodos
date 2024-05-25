@@ -36,8 +36,8 @@ pair<Vector, Matrix> get_first_eigenvalues(const Matrix& X, unsigned num, unsign
         pair<double,Vector> tupla_magica = power_iteration(A,num_iter,epsilon);
 
         eigvalues[i] = tupla_magica.first ;
+        // NOTA: SE PONEN LOS AUTOVECTORES COMO FILAS
         eigvectors.row(i) = tupla_magica.second ;
-        
 
         A = A-(get<0>(tupla_magica) * get<1>(tupla_magica) * get<1>(tupla_magica).transpose());
     }
@@ -49,3 +49,11 @@ double calcularDist(const Vector &v1, const Vector &v2){
     double dist = (v1 - v2).norm();
     return dist;
 }
+
+// Helper para los tests
+// https://stackoverflow.com/questions/41251911/check-if-an-array-is-a-multiple-of-another-array
+bool isMultiple(const Vector &one, const Vector &two) {
+    double abab = one.dot(two) * one.dot(two);
+    double aabb = one.dot(one) * two.dot(two);
+    return abab > aabb * 0.9999997;
+    }
