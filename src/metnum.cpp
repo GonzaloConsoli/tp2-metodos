@@ -20,7 +20,8 @@ PYBIND11_MODULE(metnum, m) {
         "Function that calculates eigenvector",
         py::arg("X"),
         py::arg("num_iter")=5000,
-        py::arg("epsilon")=1e-16
+        py::arg("epsilon")=1e-16,
+        py::arg("iteraciones_realizadas")=nullptr
     );
     m.def(
         "get_first_eigenvalues", &get_first_eigenvalues,

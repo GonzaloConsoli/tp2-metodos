@@ -6,21 +6,26 @@
 using namespace std;
 
 
-pair<double, Vector> power_iteration(const Matrix& A, unsigned num_iter, double eps)
+pair<double, Vector> power_iteration(const Matrix& A, unsigned num_iter, double eps, unsigned* iteraciones_realizadas)
 // Devuelve un par con el autovalor dominante y el autovector correspondiente
 {
     Vector v = Vector::Random(A.cols());
     double a;
     double b=0;
+    *iteraciones_realizadas = 0;
     for (int i=0;i<num_iter;i++){
         v= (A * v) /  (A*v).norm();
 
         b = ((v.transpose() * A).dot(v)) / (v.dot(v.transpose()) );
 
         if(abs(b-a)<eps){
+            *iteraciones_realizadas = i;
             break;
         }
         a=b;
+    }
+    if (iteraciones_realizadas == 0){
+        *iteraciones_realizadas = num_iter;
     }
 
     return make_pair(a, v);
