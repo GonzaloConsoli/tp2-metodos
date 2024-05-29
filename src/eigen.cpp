@@ -11,15 +11,17 @@ tuple<double, Vector, int> power_iteration(const Matrix& A, unsigned num_iter, d
     Vector v = Vector::Random(A.cols());
     double a;
     double b=0;
+    Vector old_v = v;
     int i=0;
     for (i=0;i<num_iter;i++){
         v= (A * v) /  (A*v).norm();
 
         b = ((v.transpose() * A).dot(v)) / (v.dot(v.transpose()) );
 
-        if(abs(b-a)<eps){
+        if ((v - old_v).lpNorm<Eigen::Infinity>() < eps) {
             break;
         }
+        old_v = v;
         a=b;
     }
     return make_tuple(a, v, i);
