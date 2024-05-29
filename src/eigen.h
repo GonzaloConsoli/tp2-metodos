@@ -1,6 +1,6 @@
 #pragma once
 #include "types.h"
-
+using namespace std;
 /*
 Calcula el autovalor (y autovector correspondiente) de módulo máximo
 
@@ -22,8 +22,7 @@ Devuelve:
 pair<double, Vector> donde el primer valor es el autovalor
 y el segundo el autovector asociado
 */
-std::pair<double, Vector>
-    power_iteration(const Matrix& mat, unsigned num_iter=5000, double eps=1e-16, unsigned* iteraciones_realizadas=nullptr);
+tuple<double, Vector, int> power_iteration(const Matrix& A, unsigned num_iter, double eps);
 
 
 /*

@@ -12,8 +12,8 @@ TEST_F(EigenTest, Handles2x2Matrix) {
     A << 4, 1,
          2, 3;
     auto result = power_iteration(A, 1000, 1e-9);
-    ASSERT_NEAR(result.first, 5, 1e-9);
-    ASSERT_TRUE(result.second.isApprox((Vector2d() << 1, 1).finished().normalized(), 1e-9));
+    ASSERT_NEAR(get<0>(result), 5, 1e-9);
+    ASSERT_TRUE(get<1>(result).isApprox((Vector2d() << 1, 1).finished().normalized(), 1e-9));
 }
 
 TEST_F(EigenTest, Handles3x3Matrix) {
@@ -22,10 +22,10 @@ TEST_F(EigenTest, Handles3x3Matrix) {
          0 ,2, 0,
         -6 ,-2 ,-2;
     auto result = power_iteration(A, 10000, 1e-9);
-    ASSERT_NEAR(result.first, 4, 1e-4);
+    ASSERT_NEAR(get<0>(result), 4, 1e-4);
     Vector3d expected = (Vector3d() << -1, 0, 1).finished();
     Vector3d expected_normalized = expected.normalized();
-    Vector3d result_normalized = result.second.normalized();
+    Vector3d result_normalized = get<1>(result).normalized();
     for (int i = 0; i < 3; ++i) {
         ASSERT_TRUE(isMultiple(expected_normalized, result_normalized));
     }

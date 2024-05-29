@@ -6,29 +6,23 @@
 using namespace std;
 
 
-pair<double, Vector> power_iteration(const Matrix& A, unsigned num_iter, double eps, unsigned* iteraciones_realizadas)
-// Devuelve un par con el autovalor dominante y el autovector correspondiente
+tuple<double, Vector, int> power_iteration(const Matrix& A, unsigned num_iter, double eps)
 {
     Vector v = Vector::Random(A.cols());
     double a;
     double b=0;
-    *iteraciones_realizadas = 0;
-    for (int i=0;i<num_iter;i++){
+    int i=0;
+    for (i=0;i<num_iter;i++){
         v= (A * v) /  (A*v).norm();
 
         b = ((v.transpose() * A).dot(v)) / (v.dot(v.transpose()) );
 
         if(abs(b-a)<eps){
-            *iteraciones_realizadas = i;
             break;
         }
         a=b;
     }
-    if (iteraciones_realizadas == 0){
-        *iteraciones_realizadas = num_iter;
-    }
-
-    return make_pair(a, v);
+    return make_tuple(a, v, i);
 }
 
 pair<Vector, Matrix> get_first_eigenvalues(const Matrix& X, unsigned num, unsigned num_iter, double epsilon)
@@ -38,13 +32,13 @@ pair<Vector, Matrix> get_first_eigenvalues(const Matrix& X, unsigned num, unsign
     Vector eigvalues(num);
     Matrix eigvectors(num, A.cols());
     for (int i=0; i<num;i++){
-        pair<double,Vector> tupla_magica = power_iteration(A,num_iter,epsilon);
+        tuple<double, Vector, int> tupla_magica = power_iteration(A,num_iter,epsilon);
 
-        eigvalues[i] = tupla_magica.first ;
+        eigvalues[i] = get<0>(tupla_magica);
         // NOTA: SE PONEN LOS AUTOVECTORES COMO FILAS
-        eigvectors.row(i) = tupla_magica.second ;
+        eigvectors.row(i) = get<1>(tupla_magica);
 
-        A = A-(get<0>(tupla_magica) * get<1>(tupla_magica) * get<1>(tupla_magica).transpose());
+        A = A - (get<0>(tupla_magica) * get<1>(tupla_magica) * get<1>(tupla_magica).transpose());
     }
 
     return make_pair(eigvalues, eigvectors);
