@@ -3,7 +3,7 @@
 
 class PCA {
 public:
-    PCA(unsigned int alfa);
+    PCA(unsigned int p);
 
     void fit(Matrix &X);
 
@@ -16,7 +16,7 @@ public:
 private:
 
     Vector eigen_values;
-    unsigned int alfa;
+    unsigned int p;
     Matrix Transformacion;
 
 

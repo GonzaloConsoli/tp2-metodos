@@ -5,17 +5,17 @@
 using namespace std;
 
 
-PCA::PCA(unsigned int alfa)
+PCA::PCA(unsigned int p)
 {
-  this->alfa= alfa;
-  this->eigen_values = Vector(alfa);
+  this->p= p;
+  this->eigen_values = Vector(p);
 }
 
 void PCA::fit(Matrix &X)
 {	
 	Matrix centered = X.rowwise() - X.colwise().mean();
 	Matrix cov = (centered.transpose() * centered) / sqrt(X.rows() - 1);
-	pair<Vector, Matrix> tupla_magica_is_back = get_first_eigenvalues(cov, this->alfa);
+	pair<Vector, Matrix> tupla_magica_is_back = get_first_eigenvalues(cov, this->p);
 
 	this->Transformacion = (tupla_magica_is_back.second).transpose();
 	this->eigen_values = tupla_magica_is_back.first;
@@ -36,8 +36,8 @@ void PCA::set_transformacion(Matrix &X){
 }
 
 Vector PCA::get_explained_variance(){
-	Vector explained_variance(this->alfa);
-	for (int i=0; i<this->alfa;i++){
+	Vector explained_variance(this->p);
+	for (int i=0; i<this->p;i++){
 		explained_variance[i] = this->eigen_values[i] / this->eigen_values.sum();
 	}
 	return explained_variance;
