@@ -1,15 +1,15 @@
-# Reconocimiento de dígitos: TP2 de Métodos Numéricos
-## 2022, 1er cuatrimestre
+# Reconocimiento de imágenes de ropa : TP2 de Métodos Numéricos
+## 2024, 1er cuatrimestre
 
 ## Instrucciones
 
-
+1. Requerimientos:
+- Python 3.7
+- CMake 3.22.1
 
 2. Bajarse los repositorios de `pybind` y `eigen` como submódulos
 
 ```
-
-# En nuestro caso ya seria:
 git submodule update --init --recursive
 
 # Elegimos versiones de eigen y pybind
@@ -52,7 +52,7 @@ make install
 - Luego se podrá hacer directamente import desde Jupyter notebooks usando el nombre del módulo exportado (import metnum en este caso)
 
 
-Listo. Ya pueden disfrutar del TP2
+Listo.
 
 ### Otros directorios
 
@@ -65,7 +65,7 @@ En `src/` está el código de C++, en particular en `src/metnum.cpp` está el en
 
 ### Directamente con python3
 ```
-python3 -m venv .
+python3 -m venv .venv
 source bin/activate
 ```
 

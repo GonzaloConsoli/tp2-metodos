@@ -5,7 +5,6 @@
 
 namespace py=pybind11;
 
-// el primer argumento es el nombre...
 PYBIND11_MODULE(metnum, m) {
     py::class_<PCA>(m, "PCA")
         .def(py::init<unsigned int>())
@@ -13,7 +12,7 @@ PYBIND11_MODULE(metnum, m) {
         .def("transform", &PCA::transform)
         .def("get_transformacion", &PCA::get_transformacion)
         .def("set_transformacion", &PCA::set_transformacion)
-        .def("get_explained_variance", &PCA::get_explained_variance)
+        .def("get_explained_variance_ratio", &PCA::get_explained_variance_ratio)
         .def("get_eigen_values", &PCA::get_eigen_values);
     m.def(
         "power_iteration", &power_iteration,
@@ -24,7 +23,7 @@ PYBIND11_MODULE(metnum, m) {
     );
     m.def(
         "get_first_eigenvalues", &get_first_eigenvalues,
-        "Function that calculates eigenvector",
+        "Function that calculates first eigenvalues and eigenvectors",
         py::arg("X"),
         py::arg("num"),
         py::arg("num_iter")=5000,

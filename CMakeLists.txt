@@ -16,14 +16,8 @@ IF(CMAKE_BUILD_TYPE MATCHES Release)
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 ENDIF()
 
-# si se usa un virtual environment setearlo aca
 set(PYTHON_EXECUTABLE "/bin/python")
 set(PYTHON_LIBRARY "/lib/libpytho.so")
-
-# Prender y apagar este flag para soporte OpenMP
-#set(USE_OpenMP ON)
-# Script cmake ``multi-plataforma`` (testeado en MacOS y Ubuntu)
-#include(cmake/OpenMP.cmake)
 
 include_directories(eigen)
 
@@ -34,10 +28,7 @@ pybind11_add_module(metnum
                     src/pca.cpp
                     src/eigen.cpp)
 
-# Por cada módulo que use OpenMP ponerlo como dependencia de esta forma
-#target_link_libraries(metnum LINK_PUBLIC OpenMP::OpenMP_CXX)
 
-# Esta variable se usa para fijar el directorio de instalación
 set(CMAKE_INSTALL_PREFIX
         ${PROJECT_SOURCE_DIR}
         CACHE PATH "Python custom modules directory" FORCE)
@@ -46,22 +37,7 @@ message(CMAKE_INSTALL_PREFIX = "${CMAKE_INSTALL_PREFIX}")
 
 install(TARGETS metnum DESTINATION ${CMAKE_INSTALL_PREFIX}/notebooks)
 
-# Crear un binario para testing manteniendo las dependencias de python por separado
 add_executable(tp2
         src/main.cpp
         src/pca.cpp
         src/eigen.cpp)
-
-
-# si se quiere hacer un ejecutable "tp2" que incluya pybind11, utilizar las
-# siguientes 3 instrucciones de cmake.
-
-#include_directories(pybind11/include)
-
-#add_executable(tp2_pybind
-#        src/main_pybind.cpp
-#        src/knn.cpp
-#        src/pca.cpp
-#        src/eigen.cpp)
-#
-#target_link_libraries(tp2_pybind PRIVATE pybind11::embed)

@@ -11,7 +11,7 @@ public:
 
     Eigen::MatrixXd get_transformacion();
     void set_transformacion(Matrix &X);
-    Vector get_explained_variance();
+    Vector get_explained_variance_ratio();
     Vector get_eigen_values();
 private:
 

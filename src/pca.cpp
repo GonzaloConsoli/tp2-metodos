@@ -15,10 +15,10 @@ void PCA::fit(Matrix &X)
 {	
 	Matrix centered = X.rowwise() - X.colwise().mean();
 	Matrix cov = (centered.transpose() * centered) / sqrt(X.rows() - 1);
-	pair<Vector, Matrix> tupla_magica_is_back = get_first_eigenvalues(cov, this->p);
+	pair<Vector, Matrix> tupla = get_first_eigenvalues(cov, this->p);
 
-	this->Transformacion = (tupla_magica_is_back.second).transpose();
-	this->eigen_values = tupla_magica_is_back.first;
+	this->Transformacion = (tupla.second).transpose();
+	this->eigen_values = tupla.first;
 
 }
 
@@ -35,7 +35,7 @@ void PCA::set_transformacion(Matrix &X){
 	this->Transformacion=X;
 }
 
-Vector PCA::get_explained_variance(){
+Vector PCA::get_explained_variance_ratio(){
 	Vector explained_variance(this->p);
 	for (int i=0; i<this->p;i++){
 		explained_variance[i] = this->eigen_values[i] / this->eigen_values.sum();
