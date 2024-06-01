@@ -37,7 +37,7 @@ void PCA::set_transformacion(Matrix &X){
 
 Vector PCA::get_explained_variance_ratio(){
 	Vector explained_variance(this->p);
-	for (int i=0; i<this->p;i++){
+	for (unsigned int i=0; i<this->p;i++){
 		explained_variance[i] = this->eigen_values[i] / this->eigen_values.sum();
 	}
 	return explained_variance;

@@ -12,7 +12,7 @@ tuple<double, Vector, int> power_iteration(const Matrix& A, unsigned num_iter, d
     double a;
     double b=0;
     Vector old_v = v;
-    int i=0;
+    unsigned int i=0;
     for (i=0;i<num_iter;i++){
         v= (A * v) /  (A*v).norm();
 
@@ -33,7 +33,7 @@ pair<Vector, Matrix> get_first_eigenvalues(const Matrix& X, unsigned num, unsign
     Matrix A(X);
     Vector eigvalues(num);
     Matrix eigvectors(num, A.cols());
-    for (int i=0; i<num;i++){
+    for (unsigned int i=0; i<num;i++){
         tuple<double, Vector, int> tupla_magica = power_iteration(A,num_iter,epsilon);
 
         eigvalues[i] = get<0>(tupla_magica);
