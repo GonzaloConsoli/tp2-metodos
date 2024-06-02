@@ -4,7 +4,7 @@
 ## Instrucciones
 
 1. Requerimientos:
-- Python 3.7
+- Python 3.8
 - CMake 3.22.1
 
 2. Bajarse los repositorios de `pybind` y `eigen` como submódulos
