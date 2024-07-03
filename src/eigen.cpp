@@ -27,23 +27,25 @@ tuple<double, Vector, int> power_iteration(const Matrix& A, unsigned num_iter, d
     return make_tuple(a, v, i);
 }
 
-pair<Vector, Matrix> get_first_eigenvalues(const Matrix& X, unsigned num, unsigned num_iter, double epsilon)
+tuple<Vector, Matrix, Vector> get_first_eigenvalues(const Matrix& X, unsigned num, unsigned num_iter, double epsilon)
 // Devuelve un par con un vector de los primeros num autovalores y una matriz con los autovectores correspondientes
 {
     Matrix A(X);
     Vector eigvalues(num);
     Matrix eigvectors(num, A.cols());
+    Vector iterations(num);
     for (unsigned int i=0; i<num;i++){
         tuple<double, Vector, int> tupla_magica = power_iteration(A,num_iter,epsilon);
 
         eigvalues[i] = get<0>(tupla_magica);
         // NOTA: SE PONEN LOS AUTOVECTORES COMO FILAS
         eigvectors.row(i) = get<1>(tupla_magica);
+        iterations[i] = get<2>(tupla_magica);
 
         A = A - (get<0>(tupla_magica) * get<1>(tupla_magica) * get<1>(tupla_magica).transpose());
     }
 
-    return make_pair(eigvalues, eigvectors);
+    return make_tuple(eigvalues, eigvectors, iterations);
 }
 
 double calcularDist(const Vector &v1, const Vector &v2){

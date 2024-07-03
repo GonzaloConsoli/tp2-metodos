@@ -15,10 +15,10 @@ void PCA::fit(Matrix &X)
 {	
 	Matrix centered = X.rowwise() - X.colwise().mean();
 	Matrix cov = (centered.transpose() * centered) / sqrt(X.rows() - 1);
-	pair<Vector, Matrix> tupla = get_first_eigenvalues(cov, this->p);
-
-	this->Transformacion = (tupla.second).transpose();
-	this->eigen_values = tupla.first;
+	tuple<Vector, Matrix, Vector> tupla = get_first_eigenvalues(cov, this->p);
+	
+	this->Transformacion = (get<1>(tupla)).transpose();
+	this->eigen_values = get<0>(tupla);
 
 }
 
